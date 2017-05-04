@@ -1,34 +1,48 @@
 $(function() {
 	var items = [
 	{
-		task: 'J Query',
+		task: 'Coconut Oil',
 		isCompleted: false
 	},
 	{
-		task: 'take a nap',
+		task: 'Blueberries',
 		isCompleted: true
 	}
 	];
 
 	var app = {
 		showTodos: function() {
-			ver itemsListEl = $('#Items-List');
+			var itemsListEl = $('#items-list');
 
-			itmesListEl.html('');
+			itemsListEl.html('');
 
 			items.forEach(function(item) {
+				var itemClasses = 'item-task' + (item.isCompleted ? ' is-completed' : '');
+				
 				itemsListEl.append('\
 				<tr>\
-					<td>' + items.task + '</td>\
+					<td class="' + itemClasses +'">' + item.task + '</td>\
 					<td>\
 						<button>Edit</button>\
 						<button>Delete</button>\
 					</td>\
-				</tr>)\
+				</tr>\
 				');
 			});
+		},
+
+		toggleTodo: function() {
+			items.forEach(function(item) {
+				if (item.task === $(this).text()) {
+					item.isCompleted = !item.isCompleted;
+				}
+			}.bind(this));
+			app.showTodos();
 		}
+
 	};
 
 	app.showTodos();
+
+	$('.item-task').on('click', app.toggleTodo);
 });

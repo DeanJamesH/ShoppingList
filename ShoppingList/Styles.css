@@ -1,0 +1,8 @@
+.item-task {
+	color: red;
+	cursor: pointer;
+}
+
+.is-completed {
+	color: green;
+}
